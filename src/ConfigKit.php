@@ -69,7 +69,7 @@ class ConfigKit
      */
     public static function str()
     {
-        return static::make('str');
+        return static::make(Str::class);
     }
 
     /**
