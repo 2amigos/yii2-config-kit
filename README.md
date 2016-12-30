@@ -1,13 +1,11 @@
 # ConfigKit 
 
-In order to provide a higher flexibility on the way we build templates for our Yii projects, we built this kit. Is 
-somehow the new generation of the widely used `YiiBootstrap` but much better structured and less complex that the 
-mentioned was.
+In order to provide ourselves a higher flexibility with the way we build templates for our Yii based projects, we built this kit. It is, in a way, the newest generation of the widely used `YiiBootstrap`, but it is so much better structured and less complex than the previously mentioned was.
 
-As we all know, Yii has a very cumbersome array configuration for its bootstrap process. The `main.php` normally 
-contains a lot of information in there regarding application settings, components, modules, parameters and many times 
-we find ourselves dealing with a huge file with settings that, even though they are ordered by keys, failed to be 
-clear due to the amount of lines within. 
+As we all know, Yii has a very cumbersome array configuration for its bootstrap process. The `main.php` script normally 
+contains a lot of information in it regarding application settings, components, modules and parameters, and many times 
+we find ourselves dealing with a huge file with settings that, even though they are ordered by keys, fails to be 
+clear due to the amount of lines within it. 
  
 ConfigKit tries to solve that issue, allowing us to create project templates with a different bootstrap and 
 configuration building process. It proposes the following configuration folder structure: 
@@ -103,10 +101,7 @@ return [
 
 ## Environment Settings Overrides 
 
-We know how important settings for different environments (test, local, stage, prod) are, and the proposed solution is 
-as simple as adding a config folder with the same structure as the mentioned previously within the folder that has the 
-name of environment. We have never found ourselves having to clone the entire structure, so simply place the files that 
-contains the settings you wish to override. 
+We know how important settings for different environments are , such as: test, local, stage and prod environments. The proposed solution to dealing with them is as simple as adding a config folder with the name of the environment needed that has the same structure within, as the previously mentioned the folder. We never found ourselves having to clone the entire structure, so you can just simply place in it the files that contains the settings you wish to override.
 
 ```php
 env
@@ -123,7 +118,7 @@ env
 
 ## Bootstrapping 
 
-We believe that application bootstrapping should also be somehow structured as its configuration. That way, all 
+We believe that application bootstrapping should also be as structured as its configuration. That way, all 
 processes are much clear and easier to manage and scale. In the project template sample [link]() you can see a working 
 sample of `ConfigKit` library + a proposed bootstrapping process. The following is the startup process of a web 
 application: 
