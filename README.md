@@ -1,13 +1,11 @@
 # ConfigKit 
 
-In order to provide a higher flexibility on the way we build templates for our Yii projects, we built this kit. Is 
-somehow the new generation of the widely used `YiiBootstrap` but much better structured and less complex that the 
-mentioned was.
+In order to provide ourselves a higher flexibility with the way we build templates for our Yii based projects, we built this kit. It is, in a way, the newest generation of the widely used `YiiBootstrap`, but it is so much better structured and less complex than the previously mentioned was.
 
-As we all know, Yii has a very cumbersome array configuration for its bootstrap process. The `main.php` normally 
-contains a lot of information in there regarding application settings, components, modules, parameters and many times 
-we find ourselves dealing with a huge file with settings that, even though they are ordered by keys, failed to be 
-clear due to the amount of lines within. 
+As we all know, Yii has a very cumbersome array configuration for its bootstrap process. The `main.php` script normally 
+contains a lot of information in it regarding application settings, components, modules and parameters, and many times 
+we find ourselves dealing with a huge file with settings that, even though they are ordered by keys, fails to be 
+clear due to the amount of lines within it. 
  
 ConfigKit tries to solve that issue, allowing us to create project templates with a different bootstrap and 
 configuration building process. It proposes the following configuration folder structure: 
