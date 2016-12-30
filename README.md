@@ -101,10 +101,7 @@ return [
 
 ## Environment Settings Overrides 
 
-We know how important settings for different environments (test, local, stage, prod) are, and the proposed solution is 
-as simple as adding a config folder with the same structure as the mentioned previously within the folder that has the 
-name of environment. We have never found ourselves having to clone the entire structure, so simply place the files that 
-contains the settings you wish to override. 
+We know how important settings for different environments are , such as: test, local, stage and prod environments. The proposed solution to dealing with them is as simple as adding a config folder with the name of the environment needed that has the same structure within, as the previously mentioned the folder. We never found ourselves having to clone the entire structure, so you can just simply place in it the files that contains the settings you wish to override.
 
 ```php
 env
@@ -121,7 +118,7 @@ env
 
 ## Bootstrapping 
 
-We believe that application bootstrapping should also be somehow structured as its configuration. That way, all 
+We believe that application bootstrapping should also be as structured as its configuration. That way, all 
 processes are much clear and easier to manage and scale. In the project template sample [link]() you can see a working 
 sample of `ConfigKit` library + a proposed bootstrapping process. The following is the startup process of a web 
 application: 
