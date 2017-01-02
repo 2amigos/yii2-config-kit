@@ -119,7 +119,8 @@ env
 ## Bootstrapping 
 
 We believe that application bootstrapping should also be as structured as its configuration. That way, all 
-processes are much clear and easier to manage and scale. In the project template sample [link]() you can see a working 
+processes are much clear and easier to manage and scale. In the Yii 2 proposed project's template 
+[https://github.com/sidekit/yii2-app-template](https://github.com/sidekit/yii2-app-template) you can see a working 
 sample of `ConfigKit` library + a proposed bootstrapping process. The following is the startup process of a web 
 application: 
 
