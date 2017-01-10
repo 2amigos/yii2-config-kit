@@ -32,6 +32,8 @@ config
     
 ```
 
+Please, keep in mind that the above configuration folder structure is really up to you. `ConfigKit` requires a `ConfigurationBuilder` that you are responsible to develop and it can have the above recommendation or another one. For an example of a `ConfigurationBuilder` please visit [https://github.com/sidekit/yii2-app-template/blob/master/src/App/Configuration/ConfigurationBuilder.php](https://github.com/sidekit/yii2-app-template/blob/master/src/App/Configuration/ConfigurationBuilder.php)
+
 ## Config File Examples
 
 ### Example of app.php
