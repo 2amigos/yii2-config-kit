@@ -234,7 +234,7 @@ class Env
     {
         // YII
         $env->required('YII_DEBUG')->allowedValues(['', '0', '1', 'true', true, 'false', false]);
-        $env->required('YII_ENV')->allowedValues(['dev', 'prod', 'test', 'stage']);
+        $env->required('YII_ENV')->allowedValues(['local', 'dev', 'prod', 'test', 'stage']);
 
         // APP
         $env->required(['APP_NAME', 'APP_ADMIN_EMAIL', 'APP_NAME']);
