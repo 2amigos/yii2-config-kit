@@ -74,7 +74,7 @@ class Env
     {
         $value = getenv($key);
         if ($value === false) {
-            return $default instanceof Closure ? $default() : $value;
+            return $default instanceof Closure ? $default() : $default;
         }
 
         return $value;
