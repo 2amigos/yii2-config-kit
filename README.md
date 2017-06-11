@@ -32,6 +32,8 @@ config
     
 ```
 
+Please, keep in mind that the above configuration folder structure is really up to you. `ConfigKit` requires a `ConfigurationBuilder` that you are responsible to develop and it can have the above recommendation or another one. For an example of a `ConfigurationBuilder` please visit [https://github.com/sidekit/yii2-app-template/blob/master/src/App/Configuration/ConfigurationBuilder.php](https://github.com/sidekit/yii2-app-template/blob/master/src/App/Configuration/ConfigurationBuilder.php)
+
 ## Config File Examples
 
 ### Example of app.php
@@ -119,7 +121,8 @@ env
 ## Bootstrapping 
 
 We believe that application bootstrapping should also be as structured as its configuration. That way, all 
-processes are much clear and easier to manage and scale. In the project template sample [link]() you can see a working 
+processes are much clear and easier to manage and scale. In the Yii 2 proposed project's template 
+[https://github.com/sidekit/yii2-app-template](https://github.com/sidekit/yii2-app-template) you can see a working 
 sample of `ConfigKit` library + a proposed bootstrapping process. The following is the startup process of a web 
 application: 
 
