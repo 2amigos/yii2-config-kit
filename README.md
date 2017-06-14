@@ -1,5 +1,9 @@
 # ConfigKit 
 
+[![Packagist Version](https://img.shields.io/packagist/v/2amigos/yii2-config-kit.svg?style=flat-square)](https://packagist.org/packages/2amigos/yii2-config-kit)
+[![Latest Stable Version](https://poser.pugx.org/2amigos/yii2-config-kit/version)](https://packagist.org/packages/2amigos/yii2-config-kit)
+[![Total Downloads](https://poser.pugx.org/2amigos/yii2-config-kit/downloads)](https://packagist.org/packages/2amigos/yii2-config-kit)
+
 In order to provide ourselves a higher flexibility with the way we build templates for our Yii based projects, we built this kit. It is, in a way, the newest generation of the widely used `YiiBootstrap`, but it is so much better structured and less complex than the previously mentioned was.
 
 As we all know, Yii has a very cumbersome array configuration for its bootstrap process. The `main.php` script normally 
