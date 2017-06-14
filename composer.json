@@ -6,8 +6,8 @@
     "type": "extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/sidekit/config/issues?state=open",
-        "source": "https://github.com/sidekit/config"
+        "issues": "https://github.com/2amigos/yii2-config-kit/issues?state=open",
+        "source": "https://github.com/2amigos/yii2-config-kit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
