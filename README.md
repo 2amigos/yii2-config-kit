@@ -45,7 +45,7 @@ Please, keep in mind that the above configuration folder structure is really up 
 ```php
 <?php
 
-use SideKit\Config\ConfigKit;
+use Da\Config\Configuration;
 
 return [
 
@@ -62,13 +62,13 @@ return [
 
     'id' => 'application-id',
 
-    'basePath' => ConfigKit::config()->getBasePath(),
+    'basePath' => Configuration::app()->getBasePath(),
 
-    'vendorPath' => ConfigKit::config()->getVendorPath(),
+    'vendorPath' => Configuration::app()->getVendorPath(),
 
-    'runtimePath' => ConfigKit::config()->getRuntimePath(),
+    'runtimePath' => Configuration::app()->getRuntimePath(),
 
-    'language' => ConfigKit::env()->get('APP_LANGUAGE'),
+    'language' => Configuration::env()->get('APP_LANGUAGE'),
 
     'bootstrap' => ['log'],
 ];
@@ -79,7 +79,7 @@ return [
 ```php
 <?php
 
-use SideKit\Config\ConfigKit;
+use Da\Config\Configuration;
 
 return [
 
@@ -93,15 +93,15 @@ return [
 
     'class' => 'yii\db\Connection',
 
-    'dsn' => ConfigKit::env()->get('DATABASE_DSN'),
+    'dsn' => Configuration::env()->get('DATABASE_DSN'),
 
-    'username' => ConfigKit::env()->get('DATABASE_USER'),
+    'username' => Configuration::env()->get('DATABASE_USER'),
 
-    'password' => ConfigKit::env()->get('DATABASE_PASSWORD'),
+    'password' => Configuration::env()->get('DATABASE_PASSWORD'),
 
-    'charset' => ConfigKit::env()->get('DATABASE_CHARSET'),
+    'charset' => Configuration::env()->get('DATABASE_CHARSET'),
 
-    'tablePrefix' => ConfigKit::env()->get('DATABASE_TABLE_PREFIX'),
+    'tablePrefix' => Configuration::env()->get('DATABASE_TABLE_PREFIX'),
 ];
 ```
 
@@ -126,7 +126,7 @@ env
 
 We believe that application bootstrapping should also be as structured as its configuration. That way, all 
 processes are much clear and easier to manage and scale. In the Yii 2 proposed project's template 
-[https://github.com/sidekit/yii2-app-template](https://github.com/sidekit/yii2-app-template) you can see a working 
+[https://github.com/2amigos/yii2-app-template](https://github.com/2amigos/yii2-app-template) you can see a working 
 sample of `ConfigKit` library + a proposed bootstrapping process. The following is the startup process of a web 
 application: 
 
@@ -211,7 +211,7 @@ Sample with all options available:
 We have added a PHP code fixer to standardize our code. It includes Symfony, PSR2 and some contributors rules. 
 
 ```bash 
-./vendor/bin/php-cs-fixer fix ./src --config .php_cs
+./vendor/bin/php-cs-fixer fix ./src --config .php_cs.dist
 ```
 
 ## Testing
