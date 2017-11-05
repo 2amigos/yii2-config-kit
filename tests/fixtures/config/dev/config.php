@@ -9,10 +9,6 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Da\Config\Exception;
-
-use Exception;
-
-class UnknownPropertyException extends Exception
-{
-}
+return [
+    'env' => 'dev'
+];

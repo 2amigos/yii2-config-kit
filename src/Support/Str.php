@@ -1,5 +1,15 @@
 <?php
-namespace SideKit\Config\Support;
+
+/*
+ * This file is part of the 2amigos/yii2-config-kit project.
+ *
+ * (c) 2amigOS! <http://2amigos.us/>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Da\Config\Support;
 
 /**
  * Class Str
@@ -9,12 +19,12 @@ namespace SideKit\Config\Support;
 class Str
 {
     /**
-     * @param $pattern
-     * @param $value
+     * @param string $pattern
+     * @param string $value
      *
      * @return bool
      */
-    public function is($pattern, $value)
+    public function is(string $pattern, string $value): bool
     {
         if ($pattern === $value) {
             return true;
@@ -27,17 +37,17 @@ class Str
         // pattern such as "library/*", making any string check convenient.
         $pattern = str_replace('\*', '.*', $pattern);
 
-        return (bool) preg_match('#^' . $pattern . '\z#u', $value);
+        return (bool)preg_match('#^' . $pattern . '\z#u', $value);
     }
 
     /**
      * Convert the given string to upper-case.
      *
-     * @param  string  $value
+     * @param string $value
      *
      * @return string
      */
-    public static function upper($value)
+    public static function upper(string $value): string
     {
         return mb_strtoupper($value, 'UTF-8');
     }
@@ -45,11 +55,11 @@ class Str
     /**
      * Convert the given string to lower-case.
      *
-     * @param  string  $value
+     * @param string $value
      *
      * @return string
      */
-    public static function lower($value)
+    public static function lower(string $value): string
     {
         return mb_strtolower($value, 'UTF-8');
     }

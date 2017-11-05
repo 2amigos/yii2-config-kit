@@ -1,11 +1,12 @@
 <?php
+
 /*
- * --------------------------------------------------------------------------
- * Register Composer class auto loader
- * --------------------------------------------------------------------------
+ * This file is part of the 2amigos/yii2-config-kit project.
  *
- * Composer is a tool for dependency management in PHP. It allows you to
- * declare the libraries your project depends on and it will manage
- * (install/update) them for you.
+ * (c) 2amigOS! <http://2amigos.us/>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
+
 require __DIR__ . '/../vendor/autoload.php';

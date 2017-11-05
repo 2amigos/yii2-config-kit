@@ -1,5 +1,15 @@
 <?php
-namespace SideKit\Config\Contracts;
+
+/*
+ * This file is part of the 2amigos/yii2-config-kit project.
+ *
+ * (c) 2amigOS! <http://2amigos.us/>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Da\Config\Contracts;
 
 interface ConfigurationBuilderInterface
 {
@@ -8,27 +18,27 @@ interface ConfigurationBuilderInterface
      *
      * @param string $path
      *
-     * @return static
+     * @return ConfigurationBuilderInterface
      */
-    public function useDirectory($path);
+    public function useDirectory(string $path): ConfigurationBuilderInterface;
 
     /**
      * Sets the cache file to store resulting config. If null, no configuration will be cached.
      *
      * @param $path
      *
-     * @return static
+     * @return ConfigurationBuilderInterface
      */
-    public function useCacheDirectory($path);
+    public function useCacheDirectory(string $path): ConfigurationBuilderInterface;
 
     /**
      * Sets whether to cache the resulting configuration file or not.
      *
      * @param boolean $value
      *
-     * @return static
+     * @return ConfigurationBuilderInterface
      */
-    public function useCache($value);
+    public function useCache(bool $value): ConfigurationBuilderInterface;
 
     /**
      * Builds the configuration file for the application.
@@ -37,5 +47,5 @@ interface ConfigurationBuilderInterface
      *
      * @return array
      */
-    public function build($name);
+    public function build(string $name): array;
 }

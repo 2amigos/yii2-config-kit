@@ -1,8 +1,18 @@
 <?php
-namespace SideKit\Config\Support;
 
-use SideKit\Config\Contracts\ConfigurationBuilderInterface;
-use SideKit\Config\Contracts\ConfigurationInterface;
+/*
+ * This file is part of the 2amigos/yii2-config-kit project.
+ *
+ * (c) 2amigOS! <http://2amigos.us/>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Da\Config\Support;
+
+use Da\Config\Contracts\ApplicationConfigurationInterface;
+use Da\Config\Contracts\ConfigurationBuilderInterface;
 
 /**
  * Class Configuration
@@ -10,7 +20,7 @@ use SideKit\Config\Contracts\ConfigurationInterface;
  * This class contains all the required folder paths information and by using the configuration builder used for a
  * particular project setup.
  */
-class Configuration implements ConfigurationInterface
+class ApplicationConfiguration implements ApplicationConfigurationInterface
 {
     /**
      * @var string application top most folder
@@ -60,7 +70,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function useConfigurationBuilder(ConfigurationBuilderInterface $builder)
+    public function useConfigurationBuilder(ConfigurationBuilderInterface $builder): ApplicationConfigurationInterface
     {
         $this->builder = $builder;
 
@@ -70,7 +80,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function useRootPath($path)
+    public function useRootPath(string $path): ApplicationConfigurationInterface
     {
         $this->rootPath = $path;
 
@@ -80,7 +90,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getRootPath()
+    public function getRootPath(): string
     {
         return $this->rootPath;
     }
@@ -88,7 +98,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function useBasePath($path)
+    public function useBasePath(string $path): ApplicationConfigurationInterface
     {
         $this->basePath = $path;
 
@@ -98,15 +108,15 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getBasePath()
+    public function getBasePath(): string
     {
-        return $this->basePath ?: $this->getRootPath() . DIRECTORY_SEPARATOR . 'app';
+        return $this->basePath ?: $this->getRootPath() . '/app';
     }
 
     /**
      * @inheritdoc
      */
-    public function useRuntimePath($path)
+    public function useRuntimePath(string $path): ApplicationConfigurationInterface
     {
         $this->runtimePath = $path;
 
@@ -116,15 +126,15 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getRuntimePath()
+    public function getRuntimePath(): string
     {
-        return $this->runtimePath ?: $this->getRootPath() . DIRECTORY_SEPARATOR . 'runtime';
+        return $this->runtimePath ?: $this->getRootPath() . '/runtime';
     }
 
     /**
      * @inheritdoc
      */
-    public function useVendorPath($path)
+    public function useVendorPath(string $path): ApplicationConfigurationInterface
     {
         $this->vendorPath = $path;
 
@@ -134,15 +144,15 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getVendorPath()
+    public function getVendorPath(): string
     {
-        return $this->vendorPath ?: $this->getRootPath() . DIRECTORY_SEPARATOR . 'vendor';
+        return $this->vendorPath ?: $this->getRootPath() . '/vendor';
     }
 
     /**
      * @inheritdoc
      */
-    public function useConfigPath($path)
+    public function useConfigPath(string $path): ApplicationConfigurationInterface
     {
         $this->configPath = $path;
 
@@ -152,15 +162,15 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getConfigPath()
+    public function getConfigPath(): string
     {
-        return $this->configPath ?: $this->getRootPath() . DIRECTORY_SEPARATOR . 'config';
+        return $this->configPath ?: $this->getRootPath() . '/config';
     }
 
     /**
      * @inheritdoc
      */
-    public function useEnvConfigPath($path)
+    public function useEnvConfigPath(string $path): ApplicationConfigurationInterface
     {
         $this->envConfigPath = $path;
 
@@ -170,15 +180,15 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getEnvConfigPath()
+    public function getEnvConfigPath(): string
     {
-        return $this->envConfigPath ?: $this->getConfigPath() . DIRECTORY_SEPARATOR . 'env';
+        return $this->envConfigPath ?: $this->getConfigPath() . '/env';
     }
 
     /**
      * @inheritdoc
      */
-    public function build($name, $cache = false)
+    public function build(string $name, bool $cache = false): array
     {
         if ($cache && isset($this->cache[$name])) {
             return $this->cache[$name];
@@ -187,7 +197,7 @@ class Configuration implements ConfigurationInterface
         $this->cache[$name] = $this->builder
             ->useDirectory($this->getConfigPath() . DIRECTORY_SEPARATOR . $name)
             ->useCache($cache)
-            ->useCacheDirectory($this->getRuntimePath() . DIRECTORY_SEPARATOR . 'config')
+            ->useCacheDirectory($this->getRuntimePath() . '/config')
             ->build($name);
 
         return $this->cache[$name];

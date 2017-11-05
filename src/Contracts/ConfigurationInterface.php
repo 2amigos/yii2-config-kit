@@ -1,109 +1,88 @@
 <?php
-namespace SideKit\Config\Contracts;
 
+/*
+ * This file is part of the 2amigos/yii2-config-kit project.
+ *
+ * (c) 2amigOS! <http://2amigos.us/>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Da\Config\Contracts;
+
+use Da\Config\Exception\BadMethodCallException;
+use Da\Config\Support\ApplicationConfiguration;
+use Da\Config\Support\Env;
+use Da\Config\Support\Filesystem;
+use Da\Config\Support\Str;
+use League\Container\ContainerInterface;
+
+/**
+ *
+ * Class ConfigurationInterface.
+ *
+ * Main container aware factory class.
+ */
 interface ConfigurationInterface
 {
     /**
-     * Sets the configuration builder for the project
+     * Returns an instance of previously configured Container definition.
      *
-     * @param ConfigurationBuilderInterface $builder
+     * @param string $class
      *
-     * @return ConfigurationInterface
+     * @throws BadMethodCallException
+     * @throws \Psr\Container\ContainerExceptionInterface Error while retrieving the entry.
+     * @throws \Psr\Container\NotFoundExceptionInterface  Error while retrieving the entry.
+     * @return mixed|object
      */
-    public function useConfigurationBuilder(ConfigurationBuilderInterface $builder);
+    public static function make(string $class);
 
     /**
-     * Configures the root directory of the application.
+     * Returns an Env instance that is aware of the environment configuration params
      *
-     * @param string $path
-     *
-     * @return ConfigurationInterface
+     * @throws BadMethodCallException
+     * @throws \Psr\Container\ContainerExceptionInterface Error while retrieving the entry.
+     * @throws \Psr\Container\NotFoundExceptionInterface  Error while retrieving the entry.
+     * @return EnvInterface
      */
-    public function useRootPath($path);
+    public static function env(): EnvInterface;
 
     /**
-     * Configures the root directory of the application.
+     * Returns Application configuration settings.
      *
-     * @param string $path
+     * @throws BadMethodCallException
+     * @throws \Psr\Container\ContainerExceptionInterface Error while retrieving the entry.
+     * @throws \Psr\Container\NotFoundExceptionInterface  Error while retrieving the entry.
      *
-     * @return ConfigurationInterface
+     * @return ApplicationConfigurationInterface
      */
-    public function useBasePath($path);
+    public static function app(): ApplicationConfigurationInterface;
 
     /**
-     * Sets the directory to be used as runtime path.
+     * Returns an instance of the Filesystem class.
      *
-     * @param string $path
-     *
-     * @return ConfigurationInterface
+     * @throws BadMethodCallException
+     * @throws \Psr\Container\ContainerExceptionInterface Error while retrieving the entry.
+     * @throws \Psr\Container\NotFoundExceptionInterface  Error while retrieving the entry.
+     * @return FilesystemInterface
      */
-    public function useRuntimePath($path);
+    public static function fs(): FilesystemInterface;
 
     /**
-     * Sets composer's vendor directory.
+     * Returns an instance of the Str utility class.
      *
-     * @param $path
+     * @throws BadMethodCallException
+     * @throws \Psr\Container\ContainerExceptionInterface Error while retrieving the entry.
+     * @throws \Psr\Container\NotFoundExceptionInterface  Error while retrieving the entry.
+     * @return Str
+     */
+    public static function str(): Str;
+
+    /**
+     * Returns an instance of the League Container
      *
-     * @return ConfigurationInterface
+     * @return ContainerInterface
      */
-    public function useVendorPath($path);
-
-    /**
-     * Sets the configuration folder path.
-     *
-     * @param string $path
-     *
-     * @return ConfigurationInterface
-     */
-    public function useConfigPath($path);
-
-    /**
-     * Sets the environments specific configuration folder path.
-     *
-     * @param string $path
-     *
-     * @return ConfigurationInterface
-     */
-    public function useEnvConfigPath($path);
-
-    /**
-     * @return string the top most root folder path.
-     */
-    public function getRootPath();
-
-    /**
-     * @return string the application's base folder path
-     */
-    public function getBasePath();
-
-    /**
-     * @return string the runtime folder path.
-     */
-    public function getRuntimePath();
-
-    /**
-     * @return string the composer's vendor folder path.
-     */
-    public function getVendorPath();
-
-    /**
-     * @return string the configuration folder path.
-     */
-    public function getConfigPath();
-
-    /**
-     * @return string the environments specific configuration folder.
-     */
-    public function getEnvConfigPath();
-
-    /**
-     * Builds and returns the configuration based on the paths provided.
-     *
-     * @param string $name the configuration name to load. The name of the configuration must be a sub-folder name
-     * under the configuration directory
-     * @param bool $cache whether to cache results or not
-     *
-     * @return array
-     */
-    public function build($name, $cache = false);
+    public static function getContainer(): ContainerInterface;
 }

@@ -1,10 +1,21 @@
 <?php
-namespace SideKit\Config\Support;
+
+/*
+ * This file is part of the 2amigos/yii2-config-kit project.
+ *
+ * (c) 2amigOS! <http://2amigos.us/>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Da\Config\Support;
 
 use Closure;
+use Da\Config\Contracts\ApplicationConfigurationInterface;
+use Da\Config\Contracts\EnvInterface;
+use Da\Config\Contracts\FilesystemInterface;
 use Dotenv\Dotenv;
-use SideKit\Config\Contracts\ConfigurationInterface;
-use SideKit\Config\Contracts\FilesystemInterface;
 use Symfony\Component\Console\Input\ArgvInput;
 
 /**
@@ -12,7 +23,7 @@ use Symfony\Component\Console\Input\ArgvInput;
  *
  * Loads the global settings included in a .env file. Is using 'Dotenv\Dotenv' internally.
  */
-class Env
+class Env implements EnvInterface
 {
     /**
      * The custom environment path defined by the developer.
@@ -32,7 +43,7 @@ class Env
      */
     protected $filesystem;
     /**
-     * @var ConfigurationInterface
+     * @var ApplicationConfigurationInterface
      */
     protected $configuration;
     /**
@@ -41,36 +52,26 @@ class Env
     protected $str;
 
     /**
-     * Env constructor.
-     *
-     * @param ConfigurationInterface $configuration
-     * @param FilesystemInterface $filesystem
-     * @param Str $str
-     * @param null $environmentPath
+     * @inheritdoc
      */
     public function __construct(
-        ConfigurationInterface $configuration,
+        ApplicationConfigurationInterface $configuration,
         FilesystemInterface $filesystem,
         Str $str = null,
         $environmentPath = null
     ) {
         $this->configuration = $configuration;
         $this->filesystem = $filesystem;
-        $this->str = isset($str) ? $str : new Str();
+        $this->str = $str ?? new Str();
         if ($environmentPath) {
             $this->useEnvironmentPath($environmentPath);
         }
     }
 
     /**
-     * Returns a specific environment value.
-     *
-     * @param string $key the environment value name
-     * @param null $default
-     *
-     * @return mixed
+     * @inheritdoc
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         $value = getenv($key);
         if ($value === false) {
@@ -81,51 +82,41 @@ class Env
     }
 
     /**
-     * Checks whether is an specific environment.
-     *
-     * @param string $env
-     *
-     * @return bool
+     * @inheritdoc
      */
-    public function is($env)
+    public function is(string $env): bool
     {
         return $this->str->is($env, $this->get('YII_ENV'));
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
-    public function isRunningInConsole()
+    public function isRunningInConsole(): bool
     {
-        return php_sapi_name() === 'cli';
+        return PHP_SAPI === 'cli';
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
-    public function isRunningTests()
+    public function isRunningTests(): bool
     {
         return $this->get('YII_ENV') === 'test';
     }
 
     /**
-     * Get the path to the environment file directory.
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function getEnvironmentPath()
+    public function getEnvironmentPath(): string
     {
         return $this->environmentPath ?: $this->configuration->getRootPath();
     }
 
     /**
-     * Set the directory for the environment file.
-     *
-     * @param  string $path
-     *
-     * @return $this
+     * @inheritdoc
      */
-    public function useEnvironmentPath($path)
+    public function useEnvironmentPath(string $path): EnvInterface
     {
         $this->environmentPath = $path;
 
@@ -133,13 +124,9 @@ class Env
     }
 
     /**
-     * Set the environment file to be loaded during bootstrapping.
-     *
-     * @param  string $file
-     *
-     * @return $this
+     * @inheritdoc
      */
-    public function loadEnvironmentFrom($file)
+    public function loadEnvironmentFrom(string $file): EnvInterface
     {
         $this->environmentFile = $file;
 
@@ -151,26 +138,23 @@ class Env
      *
      * @return string
      */
-    public function getEnvironmentFile()
+    public function getEnvironmentFile(): string
     {
         return $this->environmentFile ?: '.env';
     }
 
     /**
-     * Get the full path of the environment file.
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function getEnvironmentFilePath()
+    public function getEnvironmentFilePath(): string
     {
         return $this->getEnvironmentPath() . '/' . $this->getEnvironmentFile();
     }
 
     /**
-     * Loads environment values and ensures some that are required exists.
-     *
+     * @inheritdoc
      */
-    public function load()
+    public function load(): void
     {
         $this->checkForSpecificEnvironmentFile();
 
@@ -182,25 +166,23 @@ class Env
     }
 
     /**
-     * Overloads environment values and ensures some that are required exists. Useful method for testing purposes.
-     *
+     * @inheritdoc
      */
-    public function overload()
+    public function overload(): void
     {
         $this->checkForSpecificEnvironmentFile();
 
         $dotEnv = new Dotenv($this->getEnvironmentPath(), $this->getEnvironmentFile());
+
         $dotEnv->overload();
 
         $this->validateEnvironmentFile($dotEnv);
     }
 
     /**
-     * @param array $data changes the environment file
-     *
-     * @return bool
+     * @inheritdoc
      */
-    public function changeEnvironmentFile(array $data = [])
+    public function changeEnvironmentFile(array $data = []): bool
     {
         if (empty($data)) {
             return false;
@@ -230,7 +212,7 @@ class Env
      *
      * @param Dotenv $env
      */
-    protected function validateEnvironmentFile($env)
+    protected function validateEnvironmentFile(Dotenv $env): void
     {
         // YII
         $env->required('YII_DEBUG')->allowedValues(['', '0', '1', 'true', true, 'false', false]);
@@ -250,9 +232,9 @@ class Env
      * Detect if a custom environment file matching the APP_ENV exists.
      *
      */
-    protected function checkForSpecificEnvironmentFile()
+    protected function checkForSpecificEnvironmentFile(): void
     {
-        if ($this->isRunningInConsole() && isset($_SERVER['argv'])) {
+        if (isset($_SERVER['argv']) && $this->isRunningInConsole()) {
             $input = new ArgvInput();
 
             if ($input->hasParameterOption('--env')) {
@@ -275,10 +257,10 @@ class Env
     /**
      * Load a custom environment file.
      *
-     * @param  string $file
+     * @param string $file
      *
      */
-    protected function loadEnvironmentFile($file)
+    protected function loadEnvironmentFile($file): void
     {
         if ($this->filesystem->exists($this->getEnvironmentPath() . '/' . $file)) {
             $this->loadEnvironmentFrom($file);
@@ -292,7 +274,7 @@ class Env
      *
      * @return bool
      */
-    protected function isComment($line)
+    protected function isComment(string $line): bool
     {
         return strpos(ltrim($line), '#') === 0;
     }
@@ -304,7 +286,7 @@ class Env
      *
      * @return bool
      */
-    protected function looksLikeSetter($line)
+    protected function looksLikeSetter(string $line): bool
     {
         return strpos($line, '=') !== false;
     }
