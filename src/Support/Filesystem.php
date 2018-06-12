@@ -416,7 +416,7 @@ class Filesystem implements FilesystemInterface
                 continue;
             }
             if ($file->isFile() && preg_match($pattern, $file->getFilename())) {
-                $files[] = $file->getPathname();
+                $files[$file->getBasename()] = $file->getPathname();
             }
         }
 
