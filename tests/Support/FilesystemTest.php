@@ -13,7 +13,6 @@ namespace Da\Config\Tests\Support;
 
 use Da\Config\Support\Filesystem;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Finder\SplFileInfo;
 
 class FilesystemTest extends TestCase
 {
@@ -239,7 +238,7 @@ class FilesystemTest extends TestCase
         }
 
         $this->assertContains($this->tmpDir . '/foo.txt', $allFiles);
-        $this->assertContains($this->tmpDir . '/bar.txt', $allFiles);
+        $this->assertNotContains($this->tmpDir . '/bar.txt', $allFiles);
         $this->assertContains($this->tmpDir . '/tmp2/bar.txt', $allFiles);
     }
 
