@@ -17,7 +17,6 @@ use Da\Config\Support\Env;
 use Da\Config\Support\Filesystem;
 use Da\Config\Support\Str;
 use League\Container\ContainerInterface;
-use MyProject\Container;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase

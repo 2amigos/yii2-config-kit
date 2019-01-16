@@ -11,7 +11,6 @@
 
 namespace Da\Config\Tests\Support;
 
-use Da\Config\Contracts\ConfigurationBuilderInterface;
 use Da\Config\Support\ApplicationConfiguration;
 use Da\Config\Support\Env;
 use Da\Config\Support\Filesystem;
